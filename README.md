@@ -2,6 +2,8 @@
 
 photography portfolio 
 
+If you see any thing that can be done better please feel free to make a pull request or add something in Issues. All help is welcome!!  
+
 Goal is to keep this site simple and as litle code as possible.  
 
 upload.py: this simple program is used to process all images and upload the changes to the production server
