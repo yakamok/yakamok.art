@@ -2,7 +2,7 @@
 
 photography portfolio 
 
-Goal is to keep this site simple as litle code as possible.  
+Goal is to keep this site simple and as litle code as possible.  
 
 upload.py: this simple program is used to process all images and upload the changes to the production server
 
