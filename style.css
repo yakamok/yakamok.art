@@ -1,0 +1,145 @@
+@font-face {
+	font-family: 'CormorantGaramond';
+	src: url('/font/CormorantGaramond-Light.ttf');
+	font-display: swap;
+}
+body, input, textarea {
+    color:#000;    
+	font-family: 'CormorantGaramond',helvetica, san-serif;
+ 	padding: 0;
+ 	margin: 0;
+ 	background-color: #F0F0F0;
+}a {
+	text-decoration:underline;
+}h1 {
+	margin-top: 0px;
+	font-size: 23px;
+	color:#1c1c1c;
+	padding-bottom:5px;
+}p {
+	font-family: "san-serif";
+	font-size: 18px;
+	color:#333;
+	line-height:25px;
+	color: #5A5A5A;
+}img {
+	width: 100%;
+	height:auto;
+}#header {
+	padding-top: 24px;
+}#nav {
+	width: 60%;
+	float: right;
+	margin-top:15px;
+	padding-left:20px;
+}.clear {
+	clear:both;
+}#title, a {
+	text-decoration: none;
+	color: #000;
+}#wrapper {
+	max-width: 1280px;
+	margin: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+}#content {
+	width: 100%;
+}.row {
+	flex-direction: row;
+    border-top: solid 1px #DADADA;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0 4px;
+}.column {
+	flex: 20%;
+	max-width: 25%;
+	padding: 0 4px;
+}.column img {
+	width:100%;
+	margin-top: 8px;
+	vertical-align: middle;
+}#footer {
+	text-align: right;
+	margin-top: 45px;
+	margin-bottom: 75px;
+	border-top: solid 1px #DADADA;
+	padding: 10px;
+}.fleft {
+	float: left;
+}.fright {
+	float: right;
+}#title {
+	width: 25%;
+	float: left;
+	font-size: 45px;
+	padding-left: 6px;
+}.text {
+	line-height: 27px;
+	float: right;
+	width: 48%;
+	margin-top: 50px;
+	font-size: 18px;
+}ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	color: #000;
+}li {
+	float: right;
+}li a, .dropbtn {
+	display: inline-block;
+	color: #000;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 18px;
+}li a:hover, .dropdown:hover .dropbtn {
+	background-color: #DCDCDC;
+}li.dropdown {
+	display: inline-block;
+}.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 4;
+}.dropdown-content a {
+	color: black;
+	padding: 9px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+}.dropdown-content a:hover {
+	background-color: #f1f1f1;
+}.dropdown:hover .dropdown-content {
+	display: block;
+}.blog {
+	border-top: solid 1px #DADADA;
+	margin-bottom: -25px;
+}.hovclass:hover {
+	background-color: #fff;
+	opacity: 0.7;
+}#details {
+	border-top: solid 1px #DADADA;
+	padding:4px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	text-align: left;
+	font-size: 18px;
+}#active {
+	background-color: #E4E4E4;
+}.divide {
+	border-bottom: solid 6px #DADADA;
+}
+
+@media only screen and (max-width: 800px) {
+#nav {
+	width: 100%;
+}
+#title {
+	width: 100%;
+	padding-left: 15px;
+}
+}
