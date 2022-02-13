@@ -5,7 +5,7 @@ import sys
 
 
 originDir = '/path/to/source/' #the sources images that need to be processed
-destDir = '/path/to/destination/' #This is the final destination dir
+serverDir = '/path/to/destination/' #This is the final destination dir
 images = glob.glob(originDir + "*jpg") #index files ready for processing
 
 for x in images:
@@ -16,6 +16,6 @@ for x in images:
 
 
 os.system('for i in ' + originDir + '*.th.jpg; do echo "Processing $i"; exiftool -all= "$i"; done') #remove all exif data from thumbs to reduce file size
-os.system('rsync -av ' + originDir + '*.jpg ' destDir) #sync local copy to production server
+os.system('rsync -av ' + originDir + '*.jpg ' serverDir) #sync local copy to production server
 os.system('rm ' + originDir + '*.jpg') #cleanup source folder ready for new images
 
