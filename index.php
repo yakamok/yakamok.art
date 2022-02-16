@@ -54,11 +54,6 @@ function create_main_menu($activelink, $sublink){
 		echo '</div>';
 	}
 
-	if ($activelink === "blog") {
-		echo'<li><a ' . $active . ' href="/?page=blog&sub=blog" class="dropbtn">blog</a></li>';
-	}else {
-		echo'<li><a href="/?page=blog&sub=blog" class="dropbtn">blog</a></li>';
-	}
 	echo'<li><a href="/?sub=home" class="dropbtn">home</a></li>';
 	echo '</li></ul>';
 }
@@ -81,6 +76,7 @@ function get_sort_image_array($page_name) {
 	return $image_column_array;
 }
 
+
 #this function displays the images in the folders that are found and pulls exif data from each image
 function display_images($page_name){
 
@@ -94,6 +90,7 @@ function display_images($page_name){
 		echo '</div>';
 	}
 }
+
 
 #sanitize incoming data
 if (isset($_GET['sub'])) {
@@ -125,6 +122,7 @@ if (isset($_GET['gal'])) {
 <?php
 if ($gallset === "1") {
 	echo '<link rel="stylesheet" href="lightbox2-2.11.3/dist/css/lightbox.min.css">';
+	echo '<script src="lightbox2-2.11.3/dist/js/lightbox-plus-jquery.min.js"></script>';
 }
 ?>
 </head>
@@ -134,20 +132,19 @@ if ($gallset === "1") {
 
 
 <?php
-if ($pagecat == "blog") {
-	echo '<div id="title">Blog</div>';
-}elseif ($pagecat != NULL){
+if ($pagecat != NULL){
 	echo '<div id="title">' . ucfirst(str_replace('/', '', strstr($pagecat, '/'))) . '</div>';
-}
-if ($pagecat == NULL) {
+}else{
 	echo '<div id="title">Yakamok</div>';
 }	
 ?>
+
 <div id="nav">
-<?php create_main_menu($subcat,str_replace('/', '', strstr($pagecat, '/'))); ?>
+	<?php create_main_menu($subcat,str_replace('/', '', strstr($pagecat, '/'))); ?>
 </div>
 <div class="clear"></div>
 </div>
+
 <?php
 
 if ($pagecat == "404") {
@@ -155,26 +152,8 @@ if ($pagecat == "404") {
 }
 
 
-if ($subcat == "blog"){
-	echo '<div class="blog">';
-	require_once 'Parsedown.php';
-
-	foreach (glob("posts/*.md") as $filename) {
-		$findPosts[] = $filename;
-	}
-
-	natsort($findPosts);
-	$orgArray = array_slice(array_reverse($findPosts), 0, 4);
-
-	foreach ($orgArray as $key => $value) {
-		echo Parsedown::instance()->text(file_get_contents($value));
-		echo '<div class="divide"></div>';
-	}
-	echo '</div>';
-}
-
 if ($gallset === "1"){
-	$bannerinfo = "images/".$pagecat."/info.txt";
+	$bannerinfo = "images/".$pagecat."/info"; #this needs to have any . stripped out
 	if (file_exists($bannerinfo) !== False){
 		echo '<div id="details">';
 		include($bannerinfo);
@@ -183,7 +162,6 @@ if ($gallset === "1"){
 	echo '<div class="row">';
 	display_images($pagecat);
 	echo '</div>';
-	echo '<script src="lightbox2-2.11.3/dist/js/lightbox-plus-jquery.min.js"></script>';
 }
 
 if ($subcat == NULL || $subcat == "home") {
@@ -192,11 +170,19 @@ if ($subcat == NULL || $subcat == "home") {
 	echo "</div>";
 }
 ?>
+
 <div class="clear"></div>
 <div id="footer">
-	Copyright on all Images <?php echo date("Y"); ?>
+	<div class="fleft">
+		<strong>Contact:</strong>
+		<a href="https://twitter.com/yakamo3">Twitter</a> -
+		<a href="https://instagram.com/yakamo_k">Instagram</a>
+	</div>
+	<div class="fright">
+		Copyright on all Images <?php echo date("Y"); ?>
+	</div>
+	<div class="clear"></div>
 </div>
-
-</div>
+ </div>
 </body>
 </html>
