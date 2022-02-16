@@ -135,7 +135,7 @@ if ($gallset === "1") {
 if ($pagecat != NULL){
 	echo '<div id="title">' . ucfirst(str_replace('/', '', strstr($pagecat, '/'))) . '</div>';
 }else{
-	echo '<div id="title">Yakamok</div>';
+	echo '<div id="title">website name</div>';
 }	
 ?>
 
@@ -175,8 +175,8 @@ if ($subcat == NULL || $subcat == "home") {
 <div id="footer">
 	<div class="fleft">
 		<strong>Contact:</strong>
-		<a href="https://twitter.com/yakamo3">Twitter</a> -
-		<a href="https://instagram.com/yakamo_k">Instagram</a>
+		<a href="https://twitter.com/user">Twitter</a> -
+		<a href="https://instagram.com/user">Instagram</a>
 	</div>
 	<div class="fright">
 		Copyright on all Images <?php echo date("Y"); ?>
