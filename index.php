@@ -1,6 +1,6 @@
 <?php
 
-#check variables are sanitized
+#clean variables of anything non alphanumeric
 function variable_check($input_check){
 	if (ctype_alnum(str_replace("-","",str_replace("/","",$input_check)))){
 		return $input_check;
@@ -46,15 +46,14 @@ function create_main_menu($activelink, $sublink){
 		echo '<div class="dropdown-content">';
 		foreach (get_folders("images/" . $key) as $subkey => $value) {
 			if ($sublink == $subkey) {
-				echo '<a ' . $active . ' href=/?page=' . $key . "/" . $subkey . "&sub=" . $key . '&gal=1>' . $subkey . '</a>';
+				echo '<a ' . $active . ' href=/?page=' . $key . "/" . $subkey . '>' . $subkey . '</a>';
 			}else {
-				echo '<a href=/?page=' . $key . "/" . $subkey . "&sub=" . $key . '&gal=1>' . $subkey . '</a>';
+				echo '<a href=/?page=' . $key . "/" . $subkey . '>' . $subkey . '</a>';
 			}
 		}
 		echo '</div>';
 	}
-
-	echo'<li><a href="/?sub=home" class="dropbtn">home</a></li>';
+	echo'<li><a href="/?page=home" class="dropbtn">home</a></li>';
 	echo '</li></ul>';
 }
 
@@ -93,23 +92,16 @@ function display_images($page_name){
 
 
 #sanitize incoming data
-if (isset($_GET['sub'])) {
-	$subcat = variable_check($_GET['sub']);
+if (isset($_GET['page'])) {
+	$pagecat = variable_check($_GET['page']);
+	if (count(explode("/", $_GET['page'])) === 2){
+		$subcat = explode("/", $_GET['page'])[0];
+	}
 }else {
+	$pagecat = NULL;
 	$subcat = NULL;
 }
 
-if (isset($_GET['page'])) {
-	$pagecat = variable_check($_GET['page']);
-}else {
-	$pagecat = NULL;
-}
-
-if (isset($_GET['gal'])) {
-	$gallset = variable_check($_GET['gal']);
-}else {
-	$gallset = NULL;
-}
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +112,7 @@ if (isset($_GET['gal'])) {
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel="preload" href="/font/CormorantGaramond-Light.ttf" as="font" type="font/ttf" crossorigin>
 <?php
-if ($gallset === "1") {
+if (isset($subcat)) {
 	echo '<link rel="stylesheet" href="lightbox2-2.11.3/dist/css/lightbox.min.css">';
 	echo '<script src="lightbox2-2.11.3/dist/js/lightbox-plus-jquery.min.js"></script>';
 }
@@ -132,11 +124,12 @@ if ($gallset === "1") {
 
 
 <?php
-if ($pagecat != NULL){
+
+if ($subcat == NULL || $subcat == "home") {
+	echo '<div id="title">Yakamok</div>';
+}else {
 	echo '<div id="title">' . ucfirst(str_replace('/', '', strstr($pagecat, '/'))) . '</div>';
-}else{
-	echo '<div id="title">website name</div>';
-}	
+}
 ?>
 
 <div id="nav">
@@ -147,13 +140,8 @@ if ($pagecat != NULL){
 
 <?php
 
-if ($pagecat == "404") {
-	echo "nothing to see here";
-}
-
-
-if ($gallset === "1"){
-	$bannerinfo = "images/".$pagecat."/info"; #this needs to have any . stripped out
+if ($pagecat != "home"){
+	$bannerinfo = "images/".$pagecat."/info";
 	if (file_exists($bannerinfo) !== False){
 		echo '<div id="details">';
 		include($bannerinfo);
@@ -163,20 +151,20 @@ if ($gallset === "1"){
 	display_images($pagecat);
 	echo '</div>';
 }
-
 if ($subcat == NULL || $subcat == "home") {
 	echo '<div class="blog">';
 	echo '<br /><img src="home.jpg">';
 	echo "</div>";
 }
+
 ?>
 
 <div class="clear"></div>
 <div id="footer">
 	<div class="fleft">
 		<strong>Contact:</strong>
-		<a href="https://twitter.com/user">Twitter</a> -
-		<a href="https://instagram.com/user">Instagram</a>
+		<a href="https://twitter.com/yakamo3">Twitter</a> -
+		<a href="https://instagram.com/yakamo_k">Instagram</a>
 	</div>
 	<div class="fright">
 		Copyright on all Images <?php echo date("Y"); ?>
