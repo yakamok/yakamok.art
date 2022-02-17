@@ -1,10 +1,5 @@
 <?php
 
-	#clean variables of anything non alphanumeric
-	function variable_check($input_check){
-		return preg_replace("/[^a-zA-Z0-9\/\-]/", "", $input_check);
-	}
-
 	## this function checks the image folder to see what folders already exist and return an array
 	function get_folders($foldername){
 
@@ -91,7 +86,7 @@
 
 	#sanitize incoming data
 	if (isset($_GET['page'])) {
-		$pageVar = variable_check($_GET['page']);
+		$pageVar = preg_replace("/[^a-zA-Z0-9\/\-]/", "", $_GET['page']);
 		if (count(explode("/", $_GET['page'])) === 2){
 			$subVar = explode("/", $_GET['page'])[0];
 		}
