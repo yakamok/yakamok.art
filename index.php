@@ -2,11 +2,7 @@
 
 	#clean variables of anything non alphanumeric
 	function variable_check($input_check){
-		if (ctype_alnum(str_replace("-","",str_replace("/","",$input_check)))){
-			return $input_check;
-		}else{
-			header('location: /?page=404');
-		}
+		return preg_replace("/[^a-zA-Z0-9\/\-]/", "", $input_check);
 	}
 
 	## this function checks the image folder to see what folders already exist and return an array
@@ -57,7 +53,9 @@
 		echo '</li></ul>';
 	}
 
-
+	#
+	#
+	#change this to sort by date and to remove the need for columns - just a row with flex
 	function get_sort_image_array($page_name) {
 
 		$images_list = get_image_list("images/" . $page_name);
@@ -93,13 +91,13 @@
 
 	#sanitize incoming data
 	if (isset($_GET['page'])) {
-		$pagecat = variable_check($_GET['page']);
+		$pageVar = variable_check($_GET['page']);
 		if (count(explode("/", $_GET['page'])) === 2){
-			$subcat = explode("/", $_GET['page'])[0];
+			$subVar = explode("/", $_GET['page'])[0];
 		}
 	}else {
-		$pagecat = NULL;
-		$subcat = NULL;
+		$pageVar = NULL;
+		$subVar = NULL;
 	}
 
 ?>
@@ -112,7 +110,7 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel="preload" href="/font/CormorantGaramond-Light.ttf" as="font" type="font/ttf" crossorigin>
 <?php
-	if (isset($subcat)) {
+	if (isset($subVar)) {
 		echo '<link rel="stylesheet" href="lightbox2-2.11.3/dist/css/lightbox.min.css">';
 		echo '<script src="lightbox2-2.11.3/dist/js/lightbox-plus-jquery.min.js"></script>';
 	}
@@ -120,55 +118,54 @@
 </head>
 <body oncontextmenu="return false;">
 <div id="wrapper">
-<div id="header">
+	<div id="header">
 
-
-<?php
-	if ($subcat == NULL || $subcat == "home") {
-		echo '<div id="title">Yakamok</div>';
-	}else {
-		echo '<div id="title">' . ucfirst(str_replace('/', '', strstr($pagecat, '/'))) . '</div>';
-	}
-?>
-
-<div id="nav">
-	<?php create_main_menu($subcat,str_replace('/', '', strstr($pagecat, '/'))); ?>
-</div>
-<div class="clear"></div>
-</div>
-
-<?php
-
-	if ($pagecat == NULL || $pagecat == "home") {
-		echo '<div class="blog">';
-		echo '<br /><img src="home.jpg">';
-		echo "</div>";
-	}else {
-		$bannerinfo = "images/".$pagecat."/info";
-		if (file_exists($bannerinfo) !== False){
-			echo '<div id="details">';
-			include($bannerinfo);
-			echo '</div>';
+	<?php
+		if ($subVar == NULL || $subVar == "home") {
+			echo '<div id="title">Yakamok</div>';
+		}else {
+			echo '<div id="title">' . ucfirst(str_replace('/', '', strstr($pageVar, '/'))) . '</div>';
 		}
-		echo '<div class="row">';
-		display_images($pagecat);
-		echo '</div>';
-	}
+	?>
 
-?>
-
-<div class="clear"></div>
-<div id="footer">
-	<div class="fleft">
-		<strong>Contact:</strong>
-		<a href="https://twitter.com/yakamo3">Twitter</a> -
-		<a href="https://instagram.com/yakamo_k">Instagram</a>
-	</div>
-	<div class="fright">
-		Copyright on all Images <?php echo date("Y"); ?>
+	<div id="nav">
+		<?php create_main_menu($subVar,str_replace('/', '', strstr($pageVar, '/'))); ?>
 	</div>
 	<div class="clear"></div>
-</div>
+	</div>
+
+	<?php
+
+		if ($pageVar == NULL || $pageVar == "home") {
+			echo '<div class="home">';
+			echo '<br /><img src="home.jpg">';
+			echo "</div>";
+		}else {
+			$bannerinfo = "images/".$pageVar."/info";
+			if (file_exists($bannerinfo) !== False){
+				echo '<div id="details">';
+				include($bannerinfo);
+				echo '</div>';
+			}
+			echo '<div class="row">';
+			display_images($pageVar);
+			echo '</div>';
+		}
+
+	?>
+
+	<div class="clear"></div>
+	<div id="footer">
+		<div class="fleft">
+			<strong>Contact:</strong>
+			<a href="https://twitter.com/yakamo3">Twitter</a> -
+			<a href="https://instagram.com/yakamo_k">Instagram</a>
+		</div>
+		<div class="fright">
+			Copyright on all Images <?php echo date("Y"); ?>
+		</div>
+		<div class="clear"></div>
+	</div>
  </div>
 </body>
 </html>
