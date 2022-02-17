@@ -87,8 +87,8 @@
 	#sanitize incoming data
 	if (isset($_GET['page'])) {
 		$pageVar = preg_replace("/[^a-zA-Z0-9\/\-]/", "", $_GET['page']);
-		if (count(explode("/", $_GET['page'])) === 2){
-			$subVar = explode("/", $_GET['page'])[0];
+		if (count(explode("/", $pageVar)) === 2){
+			$subVar = explode("/", $pageVar)[0];
 		}
 	}else {
 		$pageVar = NULL;
