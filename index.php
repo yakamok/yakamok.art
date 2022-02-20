@@ -4,9 +4,9 @@
 	function get_folders($foldername){
 
 		$images_find = array();
-		foreach (glob($foldername . "/*") as $filename) {
+		foreach (glob($foldername . '/*') as $filename) {
 			if (is_dir($filename)){
-				$images_find[str_replace($foldername . "/", "", $filename)] = $filename;
+				$images_find[str_replace($foldername . '/', '', $filename)] = $filename;
 			}
 		}
 		return $images_find;
@@ -16,7 +16,7 @@
 	function get_image_list($foldername){
 
 		$images_find = array();
-		foreach (glob($foldername . "/*.jpg") as $filename) {
+		foreach (glob($foldername . '/*.jpg') as $filename) {
 			$images_find[] = $filename;
 		}
 		return $images_find;
@@ -36,15 +36,15 @@
 			}
 			echo '<div class="dropdown-content">';
 			foreach (get_folders("images/" . $key) as $subkey => $value) {
-				if ($sublink == $subkey) {
-					echo '<a ' . $active . ' href=/?page=' . $key . "/" . $subkey . '>' . $subkey . '</a>';
+				if ($sublink == $subkey && $activelink === $key) {
+					echo '<a ' . $active . ' href=/?p=' . $key . '/' . $subkey . '>' . $subkey . '</a>';
 				}else {
-					echo '<a href=/?page=' . $key . "/" . $subkey . '>' . $subkey . '</a>';
+					echo '<a href=/?p=' . $key . "/" . $subkey . '>' . $subkey . '</a>';
 				}
 			}
 			echo '</div>';
 		}
-		echo'<li><a href="/?page=home" class="dropbtn">home</a></li>';
+		echo '<li><a href="/?p=home" class="dropbtn">home</a></li>';
 		echo '</li></ul>';
 	}
 
@@ -53,11 +53,11 @@
 	#change this to sort by date and to remove the need for columns - just a row with flex
 	function get_sort_image_array($page_name) {
 
-		$images_list = get_image_list("images/" . $page_name);
+		$images_list = get_image_list('images/' . $page_name);
 		$image_column_array = array(array(), array(), array(), array());
 		$county = 0;
 		for ($i=0; $i < count($images_list); $i++) {
-			if (strpos($images_list[$i], "th.jpg") === False ) {
+			if (strpos($images_list[$i], 'th.jpg') === False ) {
 				$image_column_array[$county][$i] = $images_list[$i];
 				$county++;
 				if ($county == 4) {
@@ -75,9 +75,9 @@
 		for ($i=0; $i < 4; $i++) {
 			echo '<div class="column">';
 			foreach (get_sort_image_array($page_name)[$i] as $key => $value) {
-				$imSize = getimagesize(str_replace(".jpg", ".th.jpg", $value));
+				$imSize = getimagesize(str_replace('.jpg', '.th.jpg', $value));
 				echo '<a class="hovclass" href="' . $value . '" data-lightbox="set" >';
-				echo '<img src="' . str_replace(".jpg", ".th.jpg", $value) . '" loading="lazy"' . ' width="' . $imSize[0] . '" height="' . $imSize[1] . '"></a>';
+				echo '<img src="' . str_replace('.jpg', '.th.jpg', $value) . '" loading="lazy"' . ' width="' . $imSize[0] . '" height="' . $imSize[1] . '"></a>';
 			}
 			echo '</div>';
 		}
@@ -85,8 +85,8 @@
 
 
 	#sanitize incoming data
-	if (isset($_GET['page'])) {
-		$pageVar = preg_replace("/[^a-zA-Z0-9\/\-]/", "", $_GET['page']);
+	if (isset($_GET['p'])) {
+		$pageVar = preg_replace("/[^a-zA-Z0-9\/\-]/", "", $_GET['p']);
 		if (count(explode("/", $pageVar)) === 2){
 			$subVar = explode("/", $pageVar)[0];
 		}
@@ -133,7 +133,7 @@
 
 		if ($pageVar == NULL || $pageVar == "home") {
 			echo '<div class="home">';
-			echo '<br /><img src="home.jpg">';
+			echo '<img src="home.jpg">';
 			echo "</div>";
 		}else {
 			$bannerinfo = "images/".$pageVar."/info";
