@@ -11,17 +11,6 @@ body, input, textarea {
  	background-color: #F0F0F0;
 }a {
 	text-decoration:underline;
-}h1 {
-	margin-top: 0px;
-	font-size: 23px;
-	color:#1c1c1c;
-	padding-bottom:5px;
-}p {
-	font-family: "san-serif";
-	font-size: 18px;
-	color:#333;
-	line-height:25px;
-	color: #5A5A5A;
 }img {
 	width: 100%;
 	height:auto;
@@ -42,8 +31,6 @@ body, input, textarea {
 	margin: auto;
 	padding-left: 5px;
 	padding-right: 5px;
-}#content {
-	width: 100%;
 }.row {
 	flex-direction: row;
     border-top: solid 1px #DADADA;
@@ -73,12 +60,6 @@ body, input, textarea {
 	float: left;
 	font-size: 45px;
 	padding-left: 6px;
-}.text {
-	line-height: 27px;
-	float: right;
-	width: 48%;
-	margin-top: 50px;
-	font-size: 18px;
 }ul {
 	list-style-type: none;
 	margin: 0;
@@ -115,9 +96,10 @@ body, input, textarea {
 	background-color: #f1f1f1;
 }.dropdown:hover .dropdown-content {
 	display: block;
-}.blog {
+}.home {
 	border-top: solid 1px #DADADA;
-	margin-bottom: -25px;
+	padding-top: 8px;
+	margin-bottom: -41px;
 }.hovclass:hover {
 	background-color: #fff;
 	opacity: 0.7;
@@ -130,8 +112,6 @@ body, input, textarea {
 	font-size: 18px;
 }#active {
 	background-color: #E4E4E4;
-}.divide {
-	border-bottom: solid 6px #DADADA;
 }
 
 @media only screen and (max-width: 800px) {
