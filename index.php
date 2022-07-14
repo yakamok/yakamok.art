@@ -117,7 +117,7 @@
 
 	<?php
 		if ($subVar == NULL || $subVar == "home") {
-			echo '<div id="title">Yakamok</div>';
+			echo '<div id="title">site name</div>';
 		}else {
 			echo '<div id="title">' . ucfirst(str_replace('/', '', strstr($pageVar, '/'))) . '</div>';
 		}
@@ -153,8 +153,8 @@
 	<div id="footer">
 		<div class="fleft">
 			<strong>Contact:</strong>
-			<a href="https://twitter.com/yakamo3">Twitter</a> -
-			<a href="https://instagram.com/yakamo_k">Instagram</a>
+			<a href="https://twitter.com/username">Twitter</a> -
+			<a href="https://instagram.com/username">Instagram</a>
 		</div>
 		<div class="fright">
 			Copyright on all Images <?php echo date("Y"); ?>
